@@ -4,7 +4,7 @@
    export default function HeaderNav(){
     
     return(
-       <div className="w-full h-7 flex justify-between items-center bg-pink-900 text-white font-bold">
+       <div className="w-full h-7 flex justify-between items-center bg-pink-900 text-white font-bold ">
 
                 <div style={{ fontSize: '15px' }} className="flex gap-7 justify-center items-center w-1/3">
                     <a href="https://www.facebook.com" target="_blank" rel="noreferrer">
