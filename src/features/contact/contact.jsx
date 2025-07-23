@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
-    fullName: "",
+    name: "",
     email: "",
     phone: "",
     message: "",
@@ -24,15 +24,15 @@ export default function Contact() {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "https://webhook.site/115c2643-5f94-492c-9888-cc9f9f974e23",
+        "https://restaurantapi-production-f574.up.railway.app/api/contact",
         formData
       );
       console.log("تم الإرسال بنجاح:", res.data);
-      toast.success("تم إرسال رسالتك بنجاح 🎉");     // رسالة نجاح
-      setFormData({ fullName: "", email: "", phone: "", message: "" });
+      toast.success("تم إرسال رسالتك بنجاح 🎉");    
+      setFormData({ name: "", email: "", phone: "", message: "" });
     } catch (err) {
       console.error("حدث خطأ أثناء الإرسال:", err);
-      toast.error("فشل إرسال الرسالة، حاول مرة أخرى 😢");  // رسالة خطأ
+      toast.error("فشل إرسال الرسالة، حاول مرة أخرى 😢"); 
     }
   };
 
@@ -80,10 +80,10 @@ export default function Contact() {
           <form onSubmit={handleSubmit} className="space-y-4" dir="rtl">
             <input
               type="text"
-              name="fullName"
+              name="name"
               placeholder="الاسم بالكامل"
               required
-              value={formData.fullName}
+              value={formData.name}
               onChange={handleChange}
               className="w-full p-2 border border-gray-300 rounded"
             />
@@ -115,7 +115,7 @@ export default function Contact() {
             />
             <button
               type="submit"
-              className=" hover:bg-pink-700 text-white bg-pink-600 py-2 rounded-2xl"
+              className=" hover:bg-pink-700 text-white bg-pink-600 py-2 px-3 rounded-2xl"
             >
               أرسل رسالتك
             </button>

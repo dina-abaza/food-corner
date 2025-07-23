@@ -1,61 +1,83 @@
 
-import React from "react";
+import React, { useRef } from "react";
 import {
   FaCalendarAlt,
   FaUtensils,
   FaCreditCard,
   FaGlassCheers,
 } from "react-icons/fa";
+import { motion, useInView } from "framer-motion";
 
 export default function ServiceHome() {
+  
+  const sectionRef = useRef(null);
+  const inView = useInView(sectionRef, { once: true, threshold: 0.3 });
+
+
+  const itemVariants = {
+    hidden: { opacity: 0, x: 100 },
+    visible: (i) => ({
+      opacity: 1,
+      x: 0,
+      transition: {
+        delay: i * 0.3,
+        duration: 0.6,
+        ease: "easeOut",
+      },
+    }),
+  };
+
+  const services = [
+    {
+      icon: <FaCalendarAlt className="text-4xl text-orange-500" />,
+      title: "اختر الأيام المتاحة",
+      text: "تحقق من التواريخ المتاحة للحجز",
+    },
+    {
+      icon: <FaUtensils className="text-4xl text-green-500" />,
+      title: "أضف عناصر القائمة",
+      text: "أضف العناصر المفضلة لديك، بما في ذلك الأطباق الخاصة والمشروبات",
+    },
+    {
+      icon: <FaCreditCard className="text-4xl text-blue-500" />,
+      title: "ادفع عبر الإنترنت",
+      text: "انتقل إلى الخروج وادفع المبلغ الكامل لتأمين حجزك",
+    },
+    {
+      icon: <FaGlassCheers className="text-4xl text-purple-500" />,
+      title: "استمتع بتجربة فريدة",
+      text: "استمتع بتجربة تناول الطعام المميزة مع عائلتك وأصدقائك",
+    },
+  ];
+
   return (
     <div
-      className="relative bg-cover bg-center bg-fixed w-full h-[500px]"
+      ref={sectionRef}
+      className="relative bg-cover bg-center bg-fixed w-full py-16"
       style={{ backgroundImage: "url('/lap.jpeg')" }}
     >
-      <div className="absolute inset-0 bg-black/60"></div>
+      <div className="absolute inset-0 bg-black/60 z-0"></div>
 
-      <h1 className="absolute top-8 left-1/2 -translate-x-1/2 text-white text-3xl font-bold ">
-        أفضل خدمات مطعمنا
-      </h1>
+      <div className="relative z-10 flex flex-col items-center gap-12 px-4 text-white text-center">
+        <h1 className="text-2xl md:text-3xl font-bold">أفضل خدمات مطعمنا</h1>
 
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-wrap gap-6 justify-center items-start w-full px-6 text-center text-white  max-w-7xl">
-        <div className="flex flex-col justify-center items-center gap-y-2 w-[200px]">
-          <div className="border-2 border-dotted border-gray-300 rounded-full p-4 mb-5">
-            <FaCalendarAlt className="text-4xl text-orange-500" />
-          </div>
-          <h1 className="font-semibold text-pink-800 text-3xl">اختر الأيام المتاحة</h1>
-          <p className="text-xl">تحقق من التواريخ المتاحة للحجز</p>
-        </div>
-
-        <div className="flex flex-col justify-center items-center gap-y-2 w-[200px]">
-          <div className="border-2 border-dotted border-gray-300 rounded-full p-4 mb-5">
-            <FaUtensils className="text-4xl text-green-500" />
-          </div>
-          <h1 className="font-semibold text-pink-800 text-3xl">أضف عناصر القائمة</h1>
-          <p className="text-xl">
-            أضف العناصر المفضلة لديك، بما في ذلك الأطباق الخاصة والمشروبات
-          </p>
-        </div>
-
-        <div className="flex flex-col justify-center items-center gap-y-2 w-[200px]">
-          <div className="border-2 border-dotted border-gray-300 rounded-full p-4 mb-5">
-            <FaCreditCard className="text-4xl text-blue-500" />
-          </div>
-          <h1 className="font-semibold text-pink-800 text-3xl">ادفع عبر الإنترنت</h1>
-          <p className="text-xl">
-            انتقل إلى الخروج وادفع المبلغ الكامل لتأمين حجزك
-          </p>
-        </div>
-
-        <div className="flex flex-col justify-center items-center gap-y-2 w-[200px]">
-          <div className="border-2 border-dotted border-gray-300 rounded-full p-4 mb-5">
-            <FaGlassCheers className="text-4xl text-purple-500" />
-          </div>
-          <h1 className="font-semibold text-pink-800 text-3xl">استمتع بتجربة فريدة</h1>
-          <p className="text-xl">
-            استمتع بتجربة تناول الطعام المميزة مع عائلتك وأصدقائك
-          </p>
+        <div className="flex flex-wrap justify-center items-start gap-6 max-w-6xl w-full">
+          {services.map((service, i) => (
+            <motion.div
+              key={i}
+              custom={i}
+              variants={itemVariants}
+              initial="hidden"
+              animate={inView ? "visible" : "hidden"}
+              className="flex flex-col justify-center items-center gap-y-2 w-[200px]"
+            >
+              <div className="border-2 border-dotted border-gray-300 rounded-full p-4 mb-5">
+                {service.icon}
+              </div>
+              <h2 className="font-semibold text-pink-800 text-xl">{service.title}</h2>
+              <p className="text-sm">{service.text}</p>
+            </motion.div>
+          ))}
         </div>
       </div>
     </div>

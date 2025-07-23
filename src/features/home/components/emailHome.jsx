@@ -1,17 +1,15 @@
-
 import React, { useState } from "react";
 import { IoIosSend } from "react-icons/io";
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function EmailHome() {
   const [email, setEmail] = useState("");
-  const [message, setMessage] = useState(null);
-  const [error, setError] = useState(null);
 
   async function sendEmail() {
     if (!email || !email.includes("@")) {
-      setError("يرجى إدخال بريد إلكتروني صالح.");
-      setMessage(null);
+      toast.error("يرجى إدخال بريد إلكتروني صالح.");
       return;
     }
 
@@ -19,28 +17,18 @@ export default function EmailHome() {
       const res = await axios.post(
         "https://restaurantapi-production-f574.up.railway.app/api/subscribe",
         { email },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
+        { headers: { "Content-Type": "application/json" } }
       );
 
-      setMessage(res.data.message || "📩 تم الاشتراك بنجاح");
-      setError(null);
+      toast.success(res.data.message || "📩 تم الاشتراك بنجاح");
       setEmail("");
     } catch (err) {
       const response = err.response;
       if (response?.data?.message === "The email has already been taken.") {
-        setError("📧 هذا البريد الإلكتروني مشترك بالفعل.");
-        setEmail('')
-        setMessage('')
+        toast.error("📧 هذا البريد الإلكتروني مشترك بالفعل.");
       } else {
-        setError("حدث خطأ أثناء الاشتراك. حاول مرة أخرى.");
-        setEmail('')
-        setMessage('')
+        toast.error("حدث خطأ أثناء الاشتراك. حاول مرة أخرى.");
       }
-      setMessage(null);
     }
   }
 
@@ -61,10 +49,6 @@ export default function EmailHome() {
         >
           <IoIosSend className="text-2xl" />
         </button>
-
-      
-        {error && <p className="text-red-700 mt-2">{error}</p>}
-        {message && <p className="text-green-700 mt-2">{message}</p>}
       </div>
 
       <div className="text-center lg:text-right text-black max-w-lg">
