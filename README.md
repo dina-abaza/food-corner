@@ -1,43 +1,42 @@
 
-# 🍽️ تطبيق حجز طاولات وقائمة الطعام للمطعم
+# 🍽️ Restaurant Table Reservation & Menu App
 
-تطبيق ويب متكامل يُتيح للمستخدمين استعراض قائمة الطعام، وحجز طاولة داخل المطعم، والتواصل مع الإدارة، مع توفير تجربة استخدام سلسة وحديثة. تم تطويره باستخدام تقنيات متقدمة في الواجهة الأمامية والخلفية.
-
----
-
-## 💻 التقنيات المستخدمة
-
-### 🧩 الواجهة الأمامية
-- **React.js** – مكتبة لبناء واجهات المستخدم التفاعلية.
-- **Tailwind CSS** – إطار عمل لتنسيق الواجهة بسرعة وكفاءة.
-- **Zustand** – مكتبة خفيفة لإدارة الحالة.
-- **Axios** – للتعامل مع واجهات الـ API.
-- **React Toastify** – لعرض إشعارات مرئية وسريعة.
-- **Framer Motion** – لتنفيذ حركات وانتقالات سلسة.
-- **React Router** – للتنقل بين صفحات التطبيق.
-
-### 🔧 الواجهة الخلفية
-- **Laravel** – إطار عمل PHP لبناء واجهات API قوية، وتطبيق عمليات المصادقة.
+A full-featured web application that allows users to browse the restaurant menu, reserve a table, and contact the management. The app provides a modern and smooth user experience, built with advanced front-end and back-end technologies.
 
 ---
 
-## 🧑‍🍳 مميزات المشروع
-- ✅ تسجيل دخول وتسجيل حساب جديد.
-- 🍽️ عرض قائمة الطعام مفلترة حسب الفئات (وجبات – مشروبات – إلخ).
-- 📄 إمكانية تحميل المنيو بصيغة PDF لعرضها أو طباعتها.
-- 🪑 حجز طاولة داخل المطعم مع اختيار عدد الأفراد.
-- 📩 صفحة تواصل مع إدارة المطعم.
-- 📱 تصميم متجاوب مع جميع الأجهزة (موبايل – تابلت – لابتوب).
-- 🔔 إشعارات فورية باستخدام Toastify للتفاعل مع المستخدم.
-- 🎞️ حركات وانتقالات أنيقة باستخدام Framer Motion.
+## 💻 Technologies Used
 
+### 🧩 Frontend
+- **React.js** – A library for building interactive user interfaces.
+- **Tailwind CSS** – A utility-first CSS framework for fast and responsive styling.
+- **Zustand** – A lightweight state management library.
+- **Axios** – For making HTTP requests to the API.
+- **React Toastify** – To display stylish and quick notifications.
+- **Framer Motion** – For smooth animations and transitions.
+- **React Router** – For routing between different pages.
+
+### 🔧 Backend
+- **Laravel** – A powerful PHP framework for building APIs and handling authentication.
+
+---
+
+## 🧑‍🍳 Project Features
+
+- ✅ User authentication (login & registration).
+- 🍽️ Filterable food menu by categories (meals, drinks, etc.).
+- 📄 Option to download the full menu as a PDF for viewing or printing.
+- 🪑 Reserve a table with the ability to choose the number of guests.
+- 📩 Contact form to reach out to restaurant management.
+- 📱 Fully responsive design for mobile, tablet, and desktop.
+- 🔔 Real-time notifications using Toastify.
+- 🎞️ Smooth transitions and animations powered by Framer Motion.
 
 ---
 
-## 📌 ملاحظات إضافية
+## 📌 Additional Notes
 
-- المشروع منظم ومقسم بطريقة واضحة لتسهيل التعديل والتوسعة.
-- يمكن ربطه بسهولة بنظام إدارة طلبات أو لوحة تحكم مستقبلًا.
-- الكود قابل لإعادة الاستخدام والتوسع.
+- The project is cleanly structured and easy to maintain or expand.
+- Can be easily integrated with an admin dashboard or order management system.
+- The code is reusable and scalable for future enhancements.
 
----
