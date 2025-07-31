@@ -74,7 +74,7 @@ export default function ServiceHome() {
               <div className="border-2 border-dotted border-gray-300 rounded-full p-4 mb-5">
                 {service.icon}
               </div>
-              <h2 className="font-semibold text-pink-800 text-xl">{service.title}</h2>
+              <h2 className="font-semibold text-white text-xl">{service.title}</h2>
               <p className="text-sm">{service.text}</p>
             </motion.div>
           ))}

@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import useUserAuthStore from "../auth/authStore";
 import axios from "axios";
 import PageHeader from "../../reusableComponents/pageHeader";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function ReservationForm() {
   const { user, token } = useUserAuthStore();
@@ -14,36 +16,33 @@ export default function ReservationForm() {
     phone: "",
     tables: 1,
     people: 1,
-    date: "",   
-    time: "",  
+    date: "",
+    time: "",
   });
 
   const [loading, setLoading] = useState(false);
-  const [successMsg, setSuccessMsg] = useState("");
-  const [errorMsg, setErrorMsg] = useState("");
 
   useEffect(() => {
     if (!token) {
+      console.log(token)
       navigate("/register");
     }
   }, [token, navigate]);
 
-  function handleChange(e) {
-    setFormData({
-      ...formData,
+  const handleChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
       [e.target.name]: e.target.value,
-    });
-  }
+    }));
+  };
 
-  async function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setSuccessMsg("");
-    setErrorMsg("");
 
     try {
-      const response = await axios.post(
-        "https://your-api-url.com/api/reservations",
+      await axios.post(
+        "https://restaurantapi-production-f574.up.railway.app/api/reservation",
         formData,
         {
           headers: {
@@ -52,7 +51,9 @@ export default function ReservationForm() {
         }
       );
 
-      setSuccessMsg(response.data.message || "تم الحجز بنجاح!");
+      toast.success("تم تسجيل الحجز بنجاح. للتأكد، يُرجى التواصل مع الإدارة.", {
+        autoClose: 5000,
+      });
 
       setFormData({
         name: user?.name || "",
@@ -65,10 +66,11 @@ export default function ReservationForm() {
     } catch (error) {
       const serverMessage =
         error.response?.data?.message || "حدث خطأ أثناء الحجز. حاول مرة أخرى.";
-      setErrorMsg(serverMessage);
+      toast.error(serverMessage);
     }
+
     setLoading(false);
-  }
+  };
 
   return (
     <div className="w-full min-h-screen bg-white">
@@ -81,19 +83,12 @@ export default function ReservationForm() {
         <div className="w-full max-w-md bg-white p-8 rounded-md shadow-lg flex flex-col gap-6">
           <h2 className="text-2xl font-bold text-center mb-4">حجز طاولة</h2>
 
-          {successMsg && (
-            <p className="text-green-600 text-center font-semibold">{successMsg}</p>
-          )}
-          {errorMsg && (
-            <p className="text-red-600 text-center font-semibold">{errorMsg}</p>
-          )}
-
           <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
             <input
               type="text"
               name="name"
               placeholder="الاسم"
-              className="border-b border-pink-400 shadow-lg rounded-md py-3 px-4 text-gray-700 placeholder-grey-300 outline-none"
+              className="border-b border-pink-400 shadow-lg rounded-md py-3 px-4 text-gray-700 outline-none"
               value={formData.name}
               onChange={handleChange}
               required
@@ -103,63 +98,63 @@ export default function ReservationForm() {
               type="text"
               name="phone"
               placeholder="رقم الهاتف"
-              className="border-b border-pink-400 shadow-lg rounded-md py-3 px-4 text-gray-700 placeholder-grey-300 outline-none"
+              className="border-b border-pink-400 shadow-lg rounded-md py-3 px-4 text-gray-700 outline-none"
               value={formData.phone}
               onChange={handleChange}
               required
             />
 
-         <div className="flex flex-col">
-            <label htmlFor="tables" className="text-pink-800 font-semibold mb-1 text-right">
-               عدد الطاولات
-               </label>
-             <input
-               type="number"
-               id="tables"
-               name="tables"
+            <div className="flex flex-col">
+              <label
+                htmlFor="tables"
+                className="text-pink-800 font-semibold mb-1 text-right"
+              >
+                عدد الطاولات
+              </label>
+              <input
+                type="number"
+                id="tables"
+                name="tables"
                 min="1"
-                className="border-b border-pink-400 shadow-lg rounded-md py-3 px-4 text-gray-700  outline-none"
+                className="border-b border-pink-400 shadow-lg rounded-md py-3 px-4 text-gray-700 outline-none"
                 value={formData.tables}
                 onChange={handleChange}
                 required
               />
             </div>
-            
-            
-          <div className="flex flex-col">
-              <label htmlFor="people" className="text-pink-800 font-semibold mb-1 text-right">
-                عدد الطاولات
+
+            <div className="flex flex-col">
+              <label
+                htmlFor="people"
+                className="text-pink-800 font-semibold mb-1 text-right"
+              >
+                عدد الأفراد
               </label>
-             <input
-              type="number"
-              id="people"
-              name="people"
-              min="1"
-              className="border-b border-pink-400 shadow-lg rounded-md py-3 px-4 text-gray-700 outline-none"
-              value={formData.people}
-               onChange={handleChange}
-              required
-             />
-          </div>
+              <input
+                type="number"
+                id="people"
+                name="people"
+                min="1"
+                className="border-b border-pink-400 shadow-lg rounded-md py-3 px-4 text-gray-700 outline-none"
+                value={formData.people}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-
-            
             <input
               type="date"
               name="date"
-              placeholder="التاريخ"
-              className="border-b border-pink-400 shadow-lg rounded-md py-3 px-4 text-gray-700 placeholder-grey-300 outline-none"
+              className="border-b border-pink-400 shadow-lg rounded-md py-3 px-4 text-gray-700 outline-none"
               value={formData.date}
               onChange={handleChange}
               required
             />
 
-            
             <input
               type="time"
               name="time"
-              placeholder="الوقت"
-              className="border-b border-pink-400 shadow-lg rounded-md py-3 px-4 text-gray-700 placeholder-grey-300 outline-none"
+              className="border-b border-pink-400 shadow-lg rounded-md py-3 px-4 text-gray-700 outline-none"
               value={formData.time}
               onChange={handleChange}
               required

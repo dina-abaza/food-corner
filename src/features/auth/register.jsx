@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
@@ -13,7 +14,10 @@ export default function Register() {
   const [message, setMessage] = useState('');
 
   const navigate = useNavigate();
-  const { setUser, setToken } = useUserAuthStore();
+
+  // ✅ استخدام الاستيت من Zustand
+  const setUser = useUserAuthStore((state) => state.setUser);
+  const setToken = useUserAuthStore((state) => state.setToken);
 
   async function handelForm(e) {
     e.preventDefault();
@@ -37,15 +41,15 @@ export default function Register() {
 
     try {
       const res = await axios.post('https://restaurantapi-production-f574.up.railway.app/api/auth/register', form);
-      const data = res.data;
-
-      setUser(data.user);
-      setToken(data.token);
+      const { token: access_token, user } = res.data;
+      setToken(access_token);
+      setUser(user);
 
       setMessage("تم التسجيل بنجاح ✅");
       setError(null);
 
-      navigate('/login');
+      
+      navigate("/home")
     } catch (err) {
       setError("فشل التسجيل ❌");
       console.error("فشل التسجيل", err);

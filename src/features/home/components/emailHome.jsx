@@ -1,26 +1,28 @@
 import React, { useState } from "react";
 import { IoIosSend } from "react-icons/io";
 import axios from "axios";
-import { toast } from "react-toastify";
+import { toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function EmailHome() {
   const [email, setEmail] = useState("");
 
   async function sendEmail() {
+    toast.dismiss(); // يمسح أي توست مفتوح قبل عرض الجديد
+
     if (!email || !email.includes("@")) {
-      toast.error("يرجى إدخال بريد إلكتروني صالح.");
+      toast.error("📛 يرجى إدخال بريد إلكتروني صالح.");
       return;
     }
 
     try {
-      const res = await axios.post(
+       await axios.post(
         "https://restaurantapi-production-f574.up.railway.app/api/subscribe",
         { email },
         { headers: { "Content-Type": "application/json" } }
       );
 
-      toast.success(res.data.message || "📩 تم الاشتراك بنجاح");
+      toast.success( "📩 تم الاشتراك في النشرة الإخبارية للمطعم.");
       setEmail("");
     } catch (err) {
       const response = err.response;
@@ -59,6 +61,7 @@ export default function EmailHome() {
           احصل على المزيد من الأخبار والأطباق الشهية يوميًا من خلالنا
         </p>
       </div>
+
     </div>
   );
 }

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";            
+import "react-toastify/dist/ReactToastify.css";     
 import PageHeader from "../../reusableComponents/pageHeader";
 import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
 import axios from "axios";
-import { toast } from "react-toastify";            
-import "react-toastify/dist/ReactToastify.css";     
+import useUserAuthStore from "../auth/authStore";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -12,7 +13,7 @@ export default function Contact() {
     phone: "",
     message: "",
   });
-
+const token = useUserAuthStore((state)=>state.token)
   const handleChange = (e) => {
     setFormData((prev) => ({
       ...prev,
@@ -23,12 +24,17 @@ export default function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
+     const res = await axios.post(
         "https://restaurantapi-production-f574.up.railway.app/api/contact",
-        formData
-      );
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+    }}
+  );
+
       console.log("تم الإرسال بنجاح:", res.data);
-      toast.success("تم إرسال رسالتك بنجاح 🎉");    
+      toast.success(res.data.message||"تم إرسال رسالتك بنجاح 🎉");    
       setFormData({ name: "", email: "", phone: "", message: "" });
     } catch (err) {
       console.error("حدث خطأ أثناء الإرسال:", err);
@@ -119,6 +125,7 @@ export default function Contact() {
             >
               أرسل رسالتك
             </button>
+            
           </form>
         </div>
       </div>
