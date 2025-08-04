@@ -29,19 +29,19 @@ export default function MainNav() {
         {user ? (
           <button
             onClick={handleLogout}
-            className="bg-pink-900 text-white px-3 py-1.5 rounded hover:bg-transparent transform duration-300 text-sm"
+            className="bg-pink-900 text-white px-3 py-0.5 md:px-3 md:py-2 rounded hover:bg-transparent transform duration-300 text-xs md:text-sm"
           >
             {t("logout")}
           </button>
         ) : (
           <>
             <Link to="/login">
-              <button className="border border-pink-900 px-3 py-1.5 text-sm text-white rounded">
+              <button className="border border-pink-900 px-3 py-0.5 md:px-3 md:py-2 text-xs md:text-sm text-white rounded">
                 {t("login")}
               </button>
             </Link>
             <Link to="/register">
-              <button className="bg-pink-900 text-white px-3 py-1.5 rounded text-sm">
+              <button className="bg-pink-900 text-white px-3 py-0.5 md:px-3 md:py-2 rounded text-xs md:text-sm">
                 {t("register")}
               </button>
             </Link>
@@ -79,7 +79,7 @@ export default function MainNav() {
       </div>
 
       <div
-        className="md:hidden text-white text-2xl cursor-pointer z-50"
+        className="md:hidden text-white text-xl md:text-2xl cursor-pointer z-50 "
         onClick={() => setMenuOpen(!menuOpen)}
       >
         {menuOpen ? <FaTimes /> : <FaBars />}
