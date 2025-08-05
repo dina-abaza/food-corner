@@ -31,8 +31,8 @@ export default function Footer() {
           <div className="flex flex-row-reverse items-start gap-2 max-w-md text-right">
             <FaMapMarkerAlt className="text-red-500 text-3xl" />
             <p className="text-lg font-bold">
-              حديقة المدفعية، شارع الصاعقة، دخلة شيراتون من طريق السويس، أمام
-              موقف ٤ ونص مساكن
+              حديقة الزهور، شارع المحمود، دخلة شيراتون من طريق القاهره الصحراوي، أمام
+              موقف شبرا
             </p>
           </div>
         </div>

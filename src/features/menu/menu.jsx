@@ -104,7 +104,7 @@ export default function Menu() {
             return (
               <div
                 key={index}
-                className={`w-20 h-16 rounded-full flex items-center justify-center font-bold text-black select-none border overflow-hidden ${
+                className={`w-16 h-12 md:w-40 md:h-28 rounded-full flex items-center justify-center font-bold text-black select-none border overflow-hidden ${
                   i === 1 ? "scale-110 text-pink-800" : "opacity-50"
                 }`}
               >
