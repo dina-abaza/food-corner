@@ -88,7 +88,7 @@ export default function Menu() {
       <PageHeader title="المنيو" subtitle="تمتع بافضل الاصناف " />
 
       {/* التصنيفات */}
-      <div className="flex items-center justify-center gap-0.5 sm:gap-40 my-16">
+      <div className="flex items-center justify-center gap-1 sm:gap-40 my-16">
         <button
           onClick={prev}
           className="text-lg font-bold p-1 md:p-2 rounded-full md:bg-pink-100 md:hover:bg-pink-200"
