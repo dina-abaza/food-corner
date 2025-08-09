@@ -72,14 +72,6 @@ export default function Menu() {
     );
   }
 
-  if (loading) {
-    return <p className="text-center mt-10">جاري تحميل التصنيفات...</p>;
-  }
-
-  if (error) {
-    return <p className="text-center text-red-600 mt-10">{error}</p>;
-  }
-
   const prevIndex = (activeIndex - 1 + categories.length) % categories.length;
   const nextIndex = (activeIndex + 1) % categories.length;
 
@@ -87,76 +79,88 @@ export default function Menu() {
     <div className="overflow-x-hidden">
       <PageHeader title="المنيو" subtitle="تمتع بافضل الاصناف " />
 
-      {/* التصنيفات */}
-      <div className="flex items-center justify-center gap-1 sm:gap-40 my-16">
-        <button
-          onClick={prev}
-          className="text-lg font-bold p-1 md:p-2 rounded-full md:bg-pink-100 md:hover:bg-pink-200"
-          aria-label="السابق"
-        >
-          &lt;
-        </button>
+      {/* عرض اللودنج */}
+      {loading && (
+        <p className="text-center mt-10">جاري تحميل التصنيفات...</p>
+      )}
 
-        <div className="flex gap-6 md:gap-20">
-          {[prevIndex, activeIndex, nextIndex].map((index, i) => {
-            const category = categories[index];
-            if (!category) return null;
-            return (
-              <div
-                key={index}
-                className={`w-16 h-12 md:w-40 md:h-28 rounded-full flex items-center justify-center font-bold text-black select-none border overflow-hidden ${
-                  i === 1 ? "scale-110 text-pink-800" : "opacity-50"
-                }`}
-              >
-                <img
-                  src={categoryImages[category.name] || "/images/default.jpg"}
-                  alt={category.name}
-                  className="object-cover w-full h-full"
-                />
-              </div>
-            );
-          })}
-        </div>
+      {/* عرض الخطأ */}
+      {!loading && error && (
+        <p className="text-center text-red-600 mt-10">{error}</p>
+      )}
 
-        <button
-          onClick={next}
-          className="text-lg font-bold p-1 md:p-2 rounded-full md:bg-pink-100 md:hover:bg-pink-200"
-          aria-label="التالي"
-        >
-          &gt;
-        </button>
-      </div>
+      {/* باقي الصفحة يظهر فقط لو مفيش لودنج ولا خطأ */}
+      {!loading && !error && (
+        <>
+          {/* التصنيفات */}
+          <div className="flex items-center justify-center gap-1 sm:gap-40 my-16">
+            <button
+              onClick={prev}
+              className="text-lg font-bold p-1 md:p-2 rounded-full md:bg-pink-100 md:hover:bg-pink-200"
+              aria-label="السابق"
+            >
+              &lt;
+            </button>
 
-    
-      <div className="flex flex-wrap justify-center gap-4 px-4 pb-8 bg-white mt-20 min-h-[150px]">
-        
-        {meals.length > 0 ? (
-          <AnimatePresence >
-            {meals.map((meal) => (
-              <motion.div
-              key={meal.id}
-              initial={{ x: 100, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: -100, opacity: 0 }}
-              transition={{ duration: 0.4 }}
-              className="group relative rounded-lg p-2 flex flex-col justify-around w-[160px] h-[120px] bg-white text-pink-800 overflow-hidden shadow hover:shadow-lg"
+            <div className="flex gap-6 md:gap-20">
+              {[prevIndex, activeIndex, nextIndex].map((index, i) => {
+                const category = categories[index];
+                if (!category) return null;
+                return (
+                  <div
+                    key={index}
+                    className={`w-16 h-12 md:w-40 md:h-28 rounded-full flex items-center justify-center font-bold text-black select-none border overflow-hidden ${
+                      i === 1 ? "scale-110 text-pink-800" : "opacity-50"
+                    }`}
+                  >
+                    <img
+                      src={categoryImages[category.name] || "/images/default.jpg"}
+                      alt={category.name}
+                      className="object-cover w-full h-full"
+                    />
+                  </div>
+                );
+              })}
+            </div>
 
-              >
-            <div className="absolute inset-0 bg-[url('/menu.jpg')] bg-cover bg-center opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-0" />
-              <h3 className="text-base font-semibold relative z-10 text-center">
-                {meal.name}
-              </h3>
-              <p className="text-sm font-bold relative z-10 text-center">
-                  {meal.price} جنيه
-              </p>
-              </motion.div>
-          ))}
-          </AnimatePresence>
-        ) : (
-        <p className="text-center text-gray-500 w-full">لا توجد وجبات لعرضها</p>
-        )}
-        </div>
+            <button
+              onClick={next}
+              className="text-lg font-bold p-1 md:p-2 rounded-full md:bg-pink-100 md:hover:bg-pink-200"
+              aria-label="التالي"
+            >
+              &gt;
+            </button>
+          </div>
 
+          {/* عرض الوجبات */}
+          <div className="flex flex-wrap justify-center gap-4 px-4 pb-8 bg-white mt-20 min-h-[150px]">
+            {meals.length > 0 ? (
+              <AnimatePresence>
+                {meals.map((meal) => (
+                  <motion.div
+                    key={meal.id}
+                    initial={{ x: 100, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    exit={{ x: -100, opacity: 0 }}
+                    transition={{ duration: 0.4 }}
+                    className="group relative rounded-lg p-2 flex flex-col justify-around w-[160px] h-[120px] bg-white text-pink-800 overflow-hidden shadow hover:shadow-lg"
+                  >
+                    <div className="absolute inset-0 bg-[url('/menu.jpg')] bg-cover bg-center opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-0" />
+                    <h3 className="text-base font-semibold relative z-10 text-center">
+                      {meal.name}
+                    </h3>
+                    <p className="text-sm font-bold relative z-10 text-center">
+                      {meal.price} جنيه
+                    </p>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            ) : (
+              <p className="text-center text-gray-500 w-full">لا توجد وجبات لعرضها</p>
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 }

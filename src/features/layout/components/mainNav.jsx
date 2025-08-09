@@ -58,16 +58,29 @@ export default function MainNav() {
         </select>
       </div>
 
-      {/* Middle: Main links (desktop only) */}
-      <div className="hidden md:flex items-center">
-        <ul className="flex gap-5 items-center text-white font-bold p-4">
-          <li><Link to="/home">{t("home")}</Link></li>
-          <li><Link to="/about">{t("about")}</Link></li>
-          <li><Link to="/contact">{t("contact")}</Link></li>
-          <li><Link to="/menu">{t("menu")}</Link></li>
-          <li><Link to="/reservation">{t("reservation")}</Link></li>
-        </ul>
-      </div>
+     <div className="hidden md:flex items-center">
+      
+      <ul className="flex gap-5 items-center text-white font-bold p-4">
+    {[
+      { path: "/home", label: t("home") },
+      { path: "/about", label: t("about") },
+      { path: "/contact", label: t("contact") },
+      { path: "/menu", label: t("menu") },
+      { path: "/reservation", label: t("reservation") },
+    ].map(({ path, label }) => (
+      <li key={path}>
+        <Link
+          to={path}
+          className="relative px-1 pb-1
+            before:absolute before:bottom-0 before:left-0 before:w-0 before:h-0.5 before:bg-pink-700
+            before:transition-all before:duration-300 hover:before:w-full"
+        >
+          {label}
+        </Link>
+      </li>
+    ))}
+  </ul>
+</div>
 
       {/* Right: Hamburger icon (mobile only) */}
       <div

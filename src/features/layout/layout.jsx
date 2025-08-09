@@ -16,7 +16,7 @@ export default function LayOut() {
     <div className="min-h-screen w-full flex flex-col gap-y-10">
       <Navbar />
       
-      <WrapperAnimation key={location.pathname}>
+      <WrapperAnimation key={location.pathname} className="flex-grow">
         <Outlet />
       </WrapperAnimation>
 
