@@ -42,7 +42,7 @@ export default function ReservationForm() {
 
     try {
       await axios.post(
-        "https://restaurantapi-production-f574.up.railway.app/api/reservation",
+        "https://food-corner-api.vercel.app/api/reservation",
         formData,
         {
           headers: {

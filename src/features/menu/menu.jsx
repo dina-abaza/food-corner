@@ -22,7 +22,7 @@ export default function Menu() {
     async function fetchCategories() {
       try {
         const response = await axios.get(
-          "https://restaurantapi-production-f574.up.railway.app/api/categories"
+          "https://food-corner-api.vercel.app/api/categories"
         );
         setCategories(response.data.data);
         setError("");
@@ -44,7 +44,7 @@ export default function Menu() {
       try {
         const categoryId = categories[activeIndex]?.id;
         const response = await axios.get(
-          `https://restaurantapi-production-f574.up.railway.app/api/categories/${categoryId}/meals`
+          `https://food-corner-api.vercel.app/api/categories/${categoryId}/meals`
         );
         setMeals(response.data.meals || []);
         setError("");

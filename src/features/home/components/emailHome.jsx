@@ -17,7 +17,7 @@ export default function EmailHome() {
 
     try {
        await axios.post(
-        "https://restaurantapi-production-f574.up.railway.app/api/subscribe",
+        "https://food-corner-api.vercel.app/api/subscribe",
         { email },
         { headers: { "Content-Type": "application/json" } }
       );

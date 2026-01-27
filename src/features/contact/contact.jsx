@@ -25,7 +25,7 @@ const token = useUserAuthStore((state)=>state.token)
     e.preventDefault();
     try {
      const res = await axios.post(
-        "https://restaurantapi-production-f574.up.railway.app/api/contact",
+        "https://food-corner-api.vercel.app/api/contact",
         formData,
         {
           headers: {

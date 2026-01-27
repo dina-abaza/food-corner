@@ -24,7 +24,7 @@ export default function HeaderHome() {
       <h1 className="text-white font-bold text-2xl md:text-5xl text-center">
     اصل المطعم الايطالي</h1>
 
-  <div className="flex flex-col md:flex-row justify-center items-center gap-6 md:gap-14">
+  <div className="flex flex-col md:flex-row justify-center items-center gap-2 md:gap-6">
     <Link to="/menu.pdf" target="_blank" rel="noopener noreferrer">
       <button className="text-white bg-pink-800 font-bold text-base md:text-xl rounded-full px-5 py-2 md:px-6 md:py-2 hover:bg-pink-700 transition">
         قائمة الطعام

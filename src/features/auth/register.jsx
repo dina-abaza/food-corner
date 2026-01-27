@@ -40,7 +40,7 @@ export default function Register() {
     };
 
     try {
-      const res = await axios.post('https://restaurantapi-production-f574.up.railway.app/api/auth/register', form);
+      const res = await axios.post('https://food-corner-api.vercel.app/api/auth/register', form);
       const { token: access_token, user } = res.data;
       setToken(access_token);
       setUser(user);

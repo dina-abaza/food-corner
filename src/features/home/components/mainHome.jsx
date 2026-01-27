@@ -14,7 +14,7 @@ export default function MainHome() {
     async function fetchCategories() {
       try {
         const res = await axios.get(
-          "https://restaurantapi-production-f574.up.railway.app/api/categories"
+          "https://food-corner-api.vercel.app/api/categories"
         );
         setCategories(res.data.data);
       } catch (err) {
@@ -28,9 +28,9 @@ export default function MainHome() {
     async function fetchMeals() {
       try {
         let url =
-          "https://restaurantapi-production-f574.up.railway.app/api/meals";
+          "https://food-corner-api.vercel.app/api/meals";
         if (selectedCategory) {
-          url = `https://restaurantapi-production-f574.up.railway.app/api/categories/${selectedCategory}/meals`;
+          url = `https://food-corner-api.vercel.app/api/categories/${selectedCategory}/meals`;
         }
 
         const res = await axios.get(url);

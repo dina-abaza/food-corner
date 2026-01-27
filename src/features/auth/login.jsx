@@ -25,7 +25,7 @@ export default function Login() {
 
     try {
       const res = await axios.post(
-        'https://restaurantapi-production-f574.up.railway.app/api/auth/login',
+        'https://food-corner-api.vercel.app/api/auth/login',
         form
       );
       const data = res.data;
